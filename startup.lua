@@ -87,15 +87,6 @@ local function displayEntry(player, entry)
   sendDiscordMessage(player, name, entry.markdownResponse)
 end
 
-local function entryNotFound(player, entryName)
-  sendIngameMessage(player, "error", {
-    utils.text("Entry `", "red"),
-    utils.text(entryName, "dark_red"),
-    utils.text("` not found.", "red")
-  })
-  sendDiscordMessage(player, "error", string.format("Entry `%s` not found.", entryName))
-end
-
 local function usage(player)
   sendIngameMessage(player, "faq:usage", {
     utils.text("Usage: ", "yellow"),
@@ -118,8 +109,6 @@ local function handleMessage(user, message)
 
       if entry then
         displayEntry(user, faq[parts[2]])
-      else
-        entryNotFound(user, parts[2])
       end
     else
       usage(user)
